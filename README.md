@@ -1,116 +1,137 @@
-CNN-Based Dog and Cat Image Classification
-A Convolutional Neural Network (CNN) built with TensorFlow and Keras to classify images as cats or dogs. The notebook uses the cats_vs_dogs dataset from TensorFlow Datasets, preprocesses images, trains a CNN with three convolutional layers, evaluates performance, and visualizes predictions.
+# CNN-Based Dog and Cat Image Classification
 
-Project Overview
-The goal of this project is to demonstrate how a CNN can learn visual features from images and perform binary image classification.
+## Project Overview
 
-Objectives
-- Load the Cats vs Dogs image dataset using TensorFlow Datasets.
-- Resize images to a consistent size and normalize pixel values.
+This project implements a Convolutional Neural Network (CNN) using Python, TensorFlow, and Keras to classify images into two categories: cats and dogs.
+
+The CNN automatically learns visual features such as edges, shapes, textures, and patterns from images to distinguish between the two animal categories.
+
+## Objectives
+
+- Load the Cats vs Dogs image dataset.
+- Preprocess and resize images.
+- Normalize image pixel values.
 - Build a CNN with three convolutional layers.
-- Train the model to distinguish cats from dogs.
-- Evaluate the model using validation loss and accuracy.
-- Plot training and validation accuracy/loss.
-- Display sample images with predicted and actual labels.
+- Train the model to classify cats and dogs.
+- Evaluate model performance using validation metrics.
+- Visualize training accuracy and loss.
+- Display sample predictions with actual labels.
 
-Technologies Used
+## Technologies Used
+
 - Python
 - TensorFlow
 - Keras
-- TensorFlow Datasets (tensorflow-datasets)
+- TensorFlow Datasets
 - Matplotlib
-- importlib_resources
+- `importlib_resources`
 
-Dataset
-The notebook loads the cats_vs_dogs dataset from TensorFlow Datasets:
-tfds.load(
-    "cats_vs_dogs",
-    split=["train[:80%]", "train[80%:]"],
-    as_supervised=True,
-    with_info=True
-)
+## Dataset
+
+The project uses the Cats vs Dogs dataset available through TensorFlow Datasets.
+
+The notebook loads the dataset and divides the available data into training and validation subsets.
+
+**Dataset Configuration**
+
 - Dataset: Cats vs Dogs
-- Split: 80% training and 20% validation
-- Image size: 128 × 128 pixels
-- Color channels: 3 (RGB)
-- Batch size: 32
-- Labels: Cat and Dog
+- Training Split: 80%
+- Validation Split: 20%
+- Image Size: 128 × 128 pixels
+- Image Channels: 3 (RGB)
+- Batch Size: 32
+- Classification Type: Binary Classification
 
-TensorFlow Datasets downloads the dataset the first time the notebook runs, so an internet connection and enough disk space are required.
-CNN Architecture
-Layer	Configuration
-Input	128 × 128 × 3 RGB image
-Convolution 1	32 filters, 3 × 3 kernel, ReLU
-Max Pooling 1	2 × 2
-Convolution 2	64 filters, 3 × 3 kernel, ReLU
-Max Pooling 2	2 × 2
-Convolution 3	128 filters, 3 × 3 kernel, ReLU
-Max Pooling 3	2 × 2
-Flatten	Converts feature maps to a vector
-Dense	128 neurons, ReLU
-Dropout	0.5
-Output	1 neuron, Sigmoid
+The dataset is downloaded automatically when the notebook loads it for the first time. An internet connection and sufficient storage are required.
 
+## Model Architecture
 
-Training Configuration
+1. **Input Layer:** Accepts RGB images of size 128 × 128 × 3.
+2. **Convolutional Layer 1:** Uses 32 filters with a 3 × 3 kernel and ReLU activation.
+3. **Max Pooling Layer 1:** Reduces the spatial dimensions of the feature maps.
+4. **Convolutional Layer 2:** Uses 64 filters with a 3 × 3 kernel and ReLU activation.
+5. **Max Pooling Layer 2:** Reduces the feature-map dimensions.
+6. **Convolutional Layer 3:** Uses 128 filters with a 3 × 3 kernel and ReLU activation.
+7. **Max Pooling Layer 3:** Further reduces the spatial dimensions.
+8. **Flatten Layer:** Converts feature maps into a one-dimensional vector.
+9. **Dense Layer:** Contains 128 neurons with ReLU activation.
+10. **Dropout Layer:** Uses a dropout rate of 0.5 to help reduce overfitting.
+11. **Output Layer:** Uses one neuron with sigmoid activation to predict the probability of the positive class.
+
+## Training Configuration
+
 - Optimizer: Adam
-- Loss function: Binary cross-entropy
-- Metric: Accuracy
-- Epochs: 10
-- Batch size: 32
-- Image normalization: Pixel values scaled to the range 0–1
+- Loss Function: Binary Cross-Entropy
+- Evaluation Metric: Accuracy
+- Number of Epochs: 10
+- Batch Size: 32
+- Image Dimensions: 128 × 128 × 3
+- Pixel Normalization: Values scaled to the range 0–1
 
-Workflow
-1. Install and import the required packages.
-2. Load the Cats vs Dogs dataset.
-3. Resize each image to 128 × 128 and normalize its pixel values.
-4. Shuffle and batch the training data.
-5. Build the three-convolutional-layer CNN.
-6. Compile the model with Adam and binary cross-entropy.
-7. Train for 10 epochs and monitor validation performance.
-8. Evaluate the model on the validation dataset.
-9. Plot training/validation accuracy and loss.
-10. Show sample predictions beside their actual labels.
+## Project Workflow
 
-Installation
-Install the dependencies in a Python environment or notebook:
+1. Import the required libraries.
+2. Load the Cats vs Dogs dataset using TensorFlow Datasets.
+3. Resize the images to 128 × 128 pixels.
+4. Normalize the image pixel values.
+5. Divide the dataset into training and validation subsets.
+6. Shuffle and batch the training data.
+7. Build the CNN with three convolutional layers.
+8. Compile the model using Adam and binary cross-entropy.
+9. Train the model for the specified number of epochs.
+10. Evaluate the model on the validation dataset.
+11. Plot training and validation accuracy.
+12. Plot training and validation loss.
+13. Display sample images with their predicted and actual classes.
+
+## Installation
+
+Install the required dependencies:
+
+```bash
 pip install tensorflow tensorflow-datasets matplotlib importlib_resources
+```
 
-How to Run
-1. Download or clone this project.
-2. Open Untitled23 (2).ipynb in Google Colab, Jupyter Notebook, or JupyterLab.
-3. Ensure the runtime has internet access so TensorFlow Datasets can download the dataset.
-4. Run the notebook cells from top to bottom.
-5. Review the model summary, validation metrics, plots, and sample predictions.
-Tip: In Google Colab, select a GPU runtime if available to speed up CNN training.
+## How to Run
 
-Evaluation and Output
-The notebook displays:
-- Model architecture and parameter counts
-- Validation loss
-- Validation accuracy
-- Training and validation accuracy curves
-- Training and validation loss curves
-- Five sample images with predicted and actual classes
+1. Open the notebook in Google Colab or Jupyter Notebook.
+2. Ensure that internet access is available for downloading the dataset.
+3. Run the notebook cells from top to bottom.
+4. Review the dataset preprocessing steps.
+5. Observe the CNN model summary.
+6. Monitor training and validation accuracy.
+7. Examine the accuracy and loss graphs.
+8. Review the sample classification predictions.
 
-The final accuracy depends on the training run, software environment, and dataset processing. Refer to the metrics produced by your own notebook execution; no fixed accuracy is guaranteed.
-Repository Structure
-project-folder/
-├── README.md
-└── Untitled23 (2).ipynb
-You may rename the notebook to a simpler filename such as dog_cat_cnn.ipynb and update the filename above to match.
+**Tip:** If available, use a GPU runtime in Google Colab to speed up model training.
 
-Learning Outcomes
-- Understand the basic CNN image-classification pipeline.
-- Learn the roles of convolution, max pooling, flattening, dense layers, and dropout.
-- Prepare image data with resizing and normalization.
-- Train and evaluate a binary classifier using TensorFlow/Keras.
-- Interpret accuracy and loss curves.
-- Inspect individual predictions and compare them with ground-truth labels.
+## Output
 
-Future Improvements
-- Add data augmentation such as random flips and rotations.
-- Use early stopping and model checkpoints.
-- Compare results with transfer learning models such as MobileNetV2.
-- Add a confusion matrix, precision, recall, and F1-score.
-- Save the trained model and provide a function to predict a new uploaded image.
+The notebook produces the following outputs:
+
+- Dataset loading and preprocessing results
+- CNN architecture summary
+- Training progress over the specified epochs
+- Training and validation accuracy graph
+- Training and validation loss graph
+- Validation loss and accuracy
+- Sample images with predicted and actual labels
+
+The final accuracy depends on the training process, dataset preprocessing, and runtime environment.
+
+## Limitations
+
+- The model performs only binary classification between cats and dogs.
+- Training can require significant time and memory.
+- Model performance depends on image quality and dataset representation.
+- Training for a small number of epochs may limit classification performance.
+- The model may not generalize well to images that differ significantly from the training data.
+
+## Future Enhancements
+
+- Apply data augmentation using image flips, rotations, and zooming.
+- Add early stopping and model checkpointing.
+- Use transfer learning with MobileNetV2 or another pretrained CNN.
+- Evaluate precision, recall, F1-score, and a confusion matrix.
+- Save the trained model for future use.
+- Build a web interface that allows users to upload images and receive predictions.
